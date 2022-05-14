@@ -4,7 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
 
-export default function FormHolder() {
+export default function FormHolder( props ) {
 	const promptTextRef = useRef();
 	const [ isFetching, setIsFetching ] = useState(false);
 
@@ -32,35 +32,44 @@ export default function FormHolder() {
 				data,
 				config
 			);
-			console.log(responce.data.choices[0].text);
 			// state set to loaded
 			setIsFetching(false);
+            //Transfer the reply to the parent component
+            let ts = Date.now();
+            props.setReplyData({
+                prompt: text,
+                reply: responce.data.choices[0].text,
+                timestamp: ts
+            });
 			return responce;
 		}
 		fetchAsync();
 	}
 
 	return (
-		<div>
+		<Wrapper>
 			<h3>Form</h3>
 			<FormWrapper>
-				<label for="promptArea">Write your prompt here</label>
+				<label htmlFor="promptArea">Write your prompt here</label>
 				<textarea ref={promptTextRef} name="promptArea" />
 				<button
 					onClick={() => {
 						fetchAiResponce(promptTextRef.current.value);
 					}}
 				>
-                    {isFetching ? <Spinner className='spinnerFineTune' animation="border" /> : 'Ask AI'}
+					{isFetching ? <Spinner className="spinnerFineTune" animation="border" /> : 'Ask AI'}
 				</button>
 			</FormWrapper>
-		</div>
+		</Wrapper>
 	);
 }
 
 //Styles
 
+const Wrapper = styled.div`margin: 3%;`;
+
 const FormWrapper = styled.div`
+	margin: 5%;
 	display: flex;
 	flex-direction: column;
 
@@ -71,13 +80,15 @@ const FormWrapper = styled.div`
 	textarea {
 		color: var(--bs-white);
 		background-color: var(--bs-gray-800);
+		min-height: 300px;
+		padding: 10px;
 	}
 
 	button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 50px;
 		margin-top: 30px;
 		border-radius: 30px;
 		border: none;

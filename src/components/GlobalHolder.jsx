@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -17,23 +17,29 @@ export default function GlobalHolder() {
 
 	// }, );
 
+	// getting the reply from the FormHolder and passing it to the ResponcesHolder
+	const [ replyData, setReplyData ] = useState({
+		prompt: '',
+		reply: '',
+		timestamp: ''
+	});
+	const [ repliesArray, setRepliesArray ] = useState([]);
+
+	useEffect(() => {
+        //look throw replys array for the same timestamp
+		//if so dont add it to the array
+		//if not add it to the array (triggering the props to update)
+		for(let oldReply of repliesArray) {
+			if(oldReply.timestamp === replyData.timestamp) {
+				return;
+			}
+		}
+		setRepliesArray([ ...repliesArray, replyData ]);
+    },[replyData]); // eslint-disable-line react-hooks/exhaustive-deps
+
 	return (
 		<Wrapper>
-			<header>
-				<h1>ASK AI</h1>
-			</header>
-			<div id='formHolder'>
-				<FormHolder/>
-			</div>
-			<div id='responcesHolder'>
-				<ResponcesHolder />
-			</div>
-			<footer>
-
-			</footer>
-
-
-			{/* <Container className="fullHeight">
+			<Container className="fullHeight">
 				<Row>
 					<Col>
 						<h1>ASK AI</h1>
@@ -41,13 +47,13 @@ export default function GlobalHolder() {
 				</Row>
 				<Row>
 					<Col>
-						<FormHolder />
+						<FormHolder setReplyData={setReplyData} />
 					</Col>
 					<Col>
-						<ResponcesHolder />
+						<ResponcesHolder repliesArray={repliesArray}/>
 					</Col>
 				</Row>
-			</Container> */}
+			</Container>
 		</Wrapper>
 	);
 }
@@ -55,33 +61,20 @@ export default function GlobalHolder() {
 const Wrapper = styled.div`
 	font-family: 'PublicPixel', Courier, monospace;
 
-	display: grid;
-	height: 100vh;
-	gap: 2rem;
-	grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
-	grid-template-rows: 0.1fr 1fr 0.1fr;
-	grid-template-areas:
-		'header header header header'
-		'. form responces .'
-		'footer footer footer footer';
-
-	header {
-		display: flex;
-		align-items: center;
-		grid-area: header;
-		background-color: var(--bs-gray-800);
-		h1 {
-			margin-left: 6%;
+	h1 {
+			margin-left: 3%;
+			margin-top: 1%;
+			margin-bottom: 1%;
+			color: #34a89c;
+			animation: colorChange 3s infinite;
+	}
+	@keyframes colorChange {
+		from{
+			filter: hue-rotate(360deg);
 		}
-	}
-	footer {
-		grid-area: footer;
-	}
-	#formHolder{
-		grid-area: form;
-	}
-	#responcesHolder{
-		grid-area: responces;
+		to{
+			transform: rotate(0deg);
+		}
 	}
 
 	.fullHeight {
