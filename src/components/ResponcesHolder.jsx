@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import NoResponcesYet from './NoResponcesYet';
 import ResponceCard from './ResponceCard';
@@ -6,24 +6,16 @@ import { useResponcesContext, useResponcesUpdateContext } from '../ResponcesCont
 import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function ResponcesHolder() {
-	// context solution (no data persistence)
 	const responces = useResponcesContext();
 
-	const [addResponce, addAllResponces] = useResponcesUpdateContext();
-	const [responcesLocalStorage, setResponces] = useLocalStorage('responces',[]);
+	const [, addAllResponces] = useResponcesUpdateContext();
+	const [responcesLocalStorage, ] = useLocalStorage('responces',[]);
 
 	useEffect(() => {
 		addAllResponces(responcesLocalStorage);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// useEffect(() => {
-	// 	const responcesData = localStorage.getItem('responces');
-	// 	if (responcesData) {
-	// 		setResponces(JSON.parse(responcesData));
-	// 	}
-	// }, []);
-
-	// console.log(responces);
 	return (
 		<Wrapper>
 			<h3>Responces</h3>
@@ -31,7 +23,9 @@ export default function ResponcesHolder() {
 				{responces.length === 0 ? (
 					<NoResponcesYet />
 				) : (
-					responces.map((responce, index) => <ResponceCard 
+					responces
+					.sort((a, b) => b.timestamp - a.timestamp)
+					.map((responce) => <ResponceCard 
 						key={responce.timestamp}
 						prompt={responce.prompt} 
 						reply={responce.reply}

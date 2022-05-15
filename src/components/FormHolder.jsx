@@ -11,7 +11,7 @@ export default function FormHolder() {
 	const [ isFetching, setIsFetching ] = useState(false);
 
 	//context use (not in use at the moment)
-	const [addResponce, addAllResponces] = useResponcesUpdateContext();
+	const [addResponce, ] = useResponcesUpdateContext();
 
 	//local storage use
 	const [ responces, setResponces ] = useLocalStorage("responces", []);
@@ -61,7 +61,7 @@ export default function FormHolder() {
 
 			return responce;
 		}
-		let result = fetchAsync();
+		fetchAsync();
 	}
 
 	return (
