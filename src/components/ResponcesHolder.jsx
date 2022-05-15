@@ -1,45 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import NoResponcesYet from './NoResponcesYet';
 import ResponceCard from './ResponceCard';
+import { useResponcesContext } from '../ResponcesContext';
 
-export default function ResponcesHolder({ repliesArray }) {
-	const [cleanedUpRepliesArray, setCleanedUpRepliesArray] = useState([]);
-
-	function cleanUpRepliesArray(repliesArray) {
-    //returnd and don't mutate the array if timestamp is empty
-    if(repliesArray.length === 0) {
-      setCleanedUpRepliesArray([]);
-    }
-    else if (repliesArray[repliesArray.length - 1].timestamp === "") {
-      setCleanedUpRepliesArray([]);
-    }
-    //check if timestamp is unique
-    for(let reply of repliesArray) {
-      if(repliesArray[repliesArray.length - 1].timestamp === reply.timestamp) {
-        setCleanedUpRepliesArray([...cleanedUpRepliesArray]);
-      }
-    }
-    //idea is that add the last element of the array if timestamp is ok
-    setCleanedUpRepliesArray([...cleanedUpRepliesArray, repliesArray[repliesArray.length - 1]]);
-	}
-
-	useEffect(() => {
-			cleanUpRepliesArray(repliesArray);
-			console.log(cleanedUpRepliesArray);
-		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[ repliesArray ]
-	);
-
+export default function ResponcesHolder() {
+	const responces = useResponcesContext();
+	console.log(responces);
 	return (
 		<Wrapper>
 			<h3>Responces</h3>
 			<Content>
-				{cleanedUpRepliesArray.map(el => {
-          return <ResponceCard key={el.timestamp} prompt={el.prompt} reply={el.reply} timestamp={el.timestamp}/>;
-        })}
-				{cleanUpRepliesArray.length === 0 && <NoResponcesYet/>}
+				{responces.length === 0 ? (
+					<NoResponcesYet />
+				) : (
+					responces.map((responce, index) => <ResponceCard 
+						key={responce.timestamp}
+						prompt={responce.prompt} 
+						reply={responce.reply}
+						timestamp={responce.timestamp}
+						 />)
+				)}
 			</Content>
 		</Wrapper>
 	);

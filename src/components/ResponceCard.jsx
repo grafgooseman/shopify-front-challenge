@@ -30,4 +30,8 @@ const Wrapper = styled.div`
         font-size: 0.7rem;
         color: #34a89c;
     }
+	p {
+		line-height: 1.7;
+		font-size: 0.6rem;
+	}
 `;

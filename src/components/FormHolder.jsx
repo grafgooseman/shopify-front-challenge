@@ -1,12 +1,17 @@
 import React, { useState, useRef } from 'react';
+import { useResponcesUpdateContext } from '../ResponcesContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
 
-export default function FormHolder( props ) {
+export default function FormHolder() {
 	const promptTextRef = useRef();
 	const [ isFetching, setIsFetching ] = useState(false);
+
+	//context use
+	const addResponce = useResponcesUpdateContext();
+
 
 	function fetchAiResponce(text) {
 		const config = {
@@ -34,9 +39,10 @@ export default function FormHolder( props ) {
 			);
 			// state set to loaded
 			setIsFetching(false);
-            //Transfer the reply to the parent component
             let ts = Date.now();
-            props.setReplyData({
+			
+			//sending data throw context
+			addResponce({
                 prompt: text,
                 reply: responce.data.choices[0].text,
                 timestamp: ts

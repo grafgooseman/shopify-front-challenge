@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -7,35 +7,7 @@ import ResponcesHolder from './ResponcesHolder';
 import styled from 'styled-components';
 
 export default function GlobalHolder() {
-	// const contentRowRef = useRef();
 
-	// useEffect(() => {
-	// 	console.log(contentRowRef.current);
-    //     const el = contentRowRef.current;
-    //     const rect = el.getBoundingClientRect();
-    //     el.style.height = `${window.innerHeight - rect.x}px`;
-
-	// }, );
-
-	// getting the reply from the FormHolder and passing it to the ResponcesHolder
-	const [ replyData, setReplyData ] = useState({
-		prompt: '',
-		reply: '',
-		timestamp: ''
-	});
-	const [ repliesArray, setRepliesArray ] = useState([]);
-
-	useEffect(() => {
-        //look throw replys array for the same timestamp
-		//if so dont add it to the array
-		//if not add it to the array (triggering the props to update)
-		for(let oldReply of repliesArray) {
-			if(oldReply.timestamp === replyData.timestamp) {
-				return;
-			}
-		}
-		setRepliesArray([ ...repliesArray, replyData ]);
-    },[replyData]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<Wrapper>
@@ -47,10 +19,10 @@ export default function GlobalHolder() {
 				</Row>
 				<Row>
 					<Col>
-						<FormHolder setReplyData={setReplyData} />
+						<FormHolder/>
 					</Col>
 					<Col>
-						<ResponcesHolder repliesArray={repliesArray}/>
+						<ResponcesHolder/>
 					</Col>
 				</Row>
 			</Container>
