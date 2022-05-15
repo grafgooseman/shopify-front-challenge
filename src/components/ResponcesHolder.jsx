@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NoResponcesYet from './NoResponcesYet';
 import ResponceCard from './ResponceCard';
-import { useResponcesContext } from '../ResponcesContext';
+import { useResponcesContext, useResponcesUpdateContext } from '../ResponcesContext';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function ResponcesHolder() {
+	// context solution (no data persistence)
 	const responces = useResponcesContext();
-	console.log(responces);
+
+	const [addResponce, addAllResponces] = useResponcesUpdateContext();
+	const [responcesLocalStorage, setResponces] = useLocalStorage('responces',[]);
+
+	useEffect(() => {
+		addAllResponces(responcesLocalStorage);
+	}, []);
+
+	// useEffect(() => {
+	// 	const responcesData = localStorage.getItem('responces');
+	// 	if (responcesData) {
+	// 		setResponces(JSON.parse(responcesData));
+	// 	}
+	// }, []);
+
+	// console.log(responces);
 	return (
 		<Wrapper>
 			<h3>Responces</h3>

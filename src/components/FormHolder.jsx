@@ -4,13 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function FormHolder() {
 	const promptTextRef = useRef();
 	const [ isFetching, setIsFetching ] = useState(false);
 
-	//context use
-	const addResponce = useResponcesUpdateContext();
+	//context use (not in use at the moment)
+	const [addResponce, addAllResponces] = useResponcesUpdateContext();
+
+	//local storage use
+	const [ responces, setResponces ] = useLocalStorage("responces", []);
 
 
 	function fetchAiResponce(text) {
@@ -41,15 +45,23 @@ export default function FormHolder() {
 			setIsFetching(false);
             let ts = Date.now();
 			
-			//sending data throw context
+			//sending data throw context (not in use)
 			addResponce({
                 prompt: text,
                 reply: responce.data.choices[0].text,
                 timestamp: ts
             });
+
+			// adding data to local storage
+			setResponces([ ...responces, {
+				prompt: text,
+				reply: responce.data.choices[0].text,
+				timestamp: ts
+			} ]);
+
 			return responce;
 		}
-		fetchAsync();
+		let result = fetchAsync();
 	}
 
 	return (

@@ -1,4 +1,4 @@
-import React, {Children, useContext, useState} from 'react'
+import React, { useContext, useState} from 'react'
 
 const ResponcesContext = React.createContext();
 const ResponcesUpdateContext = React.createContext();
@@ -18,9 +18,13 @@ export function ResponcesProvider( {children}) {
     setResponces([...responces, responce]);
   }
 
+  function addAllResponces(responces) {
+    setResponces(responces);
+  }
+
   return (
     <ResponcesContext.Provider value={responces}>
-      <ResponcesUpdateContext.Provider value={addResponce}>
+      <ResponcesUpdateContext.Provider value={[addResponce, addAllResponces]}>
         {children}
       </ResponcesUpdateContext.Provider>
     </ResponcesContext.Provider>
