@@ -30,6 +30,7 @@ export default function ResponcesHolder() {
 						prompt={responce.prompt} 
 						reply={responce.reply}
 						timestamp={responce.timestamp}
+						engine={responce.engine}
 						 />)
 				)}
 			</Content>

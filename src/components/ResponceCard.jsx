@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function ResponceCard( {prompt, reply, timestamp} ) {
+export default function ResponceCard( {prompt, reply, timestamp, engine} ) {
 	return (
 		<Wrapper>
 			<h3 className='humanHeader'>Meaty Human Prompt:</h3>
 			<p>{prompt}</p>
-			<h3 className='aiheader'>AI Overlord Reply:</h3>
+			<h3 className='aiheader'>{engine} reply:</h3>
 			<p>{reply}</p>
 		</Wrapper>
 	);
