@@ -7,6 +7,11 @@ Out of additional challenges I did:
 * Saving data on page reload
 * Giving the possibility to users to choose the AI engine
 
+### Semantics
+Big thought was given to semantics and accessibility.  
+All headings are ```<h1>``` or ```<h3>``` where needed, buttons are actually ```<button>``` elements and text is located in ```<p>``` tags
+In addition, clicking ```Enter``` will also submit the AI request.
+
 ### Styling
 For styling, the React-Bootstrap + Styled Components combination was used.  
 That allowed to have a quick and adaptable UI development workflow with the customization of Styled components 
