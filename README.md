@@ -1,7 +1,7 @@
 # Shopify Fronend Challenge
 Made by [*Artem Gusev*](https://www.linkedin.com/in/gusev-artem/). Specially for [**Shopify Internship program**](https://internships.shopify.com/?utm_source=Shopify-careers&utm_medium=early-talent-page&utm_campaign=general) Fall 2022
 
-## Additional info
+## Additional Info
 This application is made using React.
 Out of additional challenges I did:
 * Saving data on page reload
@@ -12,7 +12,7 @@ Big thought was given to semantics and accessibility.
 All headings are ```<h1>``` or ```<h3>``` where needed, buttons are actually ```<button>``` elements and text is located in ```<p>``` tags
 In addition, clicking ```Enter``` will also submit the AI request.
 
-### Error handling
+### Error Handling
 
 The application also has Error Handling. If the OpenAI is inaccessible or API key is incorrect, the app will alert about it. 
 
@@ -30,4 +30,4 @@ I really hope that I could be useful to the Shopify team and the knowledge I got
 Even though my code might not be perfect, I would really like to hear how can it be refactored and improved.
 
 I am glad for the opportunity you are giving to all of us,  
-Looking forward to hearing from you soon
+Looking forward to hearing from you soon🙂
