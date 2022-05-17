@@ -37,35 +37,51 @@ export default function FormHolder() {
 		async function fetchAsync() {
 			// state set to loading
 			setIsFetching(true);
-			const responce = await axios.post(
-				`https://api.openai.com/v1/engines/${selectedEngine}/completions`,
-				data,
-				config
-			);
-			// state set to loaded
-			setIsFetching(false);
-			let ts = Date.now();
 
-			//sending data throw context (not in use)
-			addResponce({
-				prompt: text,
-				reply: responce.data.choices[0].text,
-				timestamp: ts,
-				engine: selectedEngine
-			});
-
-			// adding data to local storage
-			setResponces([
-				...responces,
-				{
+			try {
+				const responce = await axios.post(
+					`https://api.openai.com/v1/engines/${selectedEngine}/completions`,
+					data,
+					config
+				);
+				console.log(responce);
+	
+				//check if responce is error or not
+				if (responce.error) {
+					alert("Sorry, but something didnt work. Please try again later. \n\n" 
+					+ responce.error.message);
+					setIsFetching(false);
+					return;
+				}
+	
+				// state set to loaded
+				setIsFetching(false);
+				let ts = Date.now();
+	
+				//sending data throw context (not in use)
+				addResponce({
 					prompt: text,
 					reply: responce.data.choices[0].text,
 					timestamp: ts,
 					engine: selectedEngine
-				}
-			]);
+				});
+	
+				// adding data to local storage
+				setResponces([
+					...responces,
+					{
+						prompt: text,
+						reply: responce.data.choices[0].text,
+						timestamp: ts,
+						engine: selectedEngine
+					}
+				]);
+			} catch (error) {
+				alert("Sorry, but something didnt work. (API Key?)\nPlease try again later.\n\n"
+				+ error.message);
+				setIsFetching(false);
+			}
 
-			return responce;
 		}
 		fetchAsync();
 	}
@@ -84,7 +100,6 @@ export default function FormHolder() {
 		};
 	  }, []);
 
-
 	return (
 		<Wrapper>
 			<h3>Form</h3>
@@ -95,12 +110,12 @@ export default function FormHolder() {
 					<DropdownWrapper>
 						<Form.Select
 							as="select"
-							custom
 							onChange={(e) => setSelectedEngine(e.target.value)}
+							defaultValue={"text-curie-001"}
 						>
 							<option value="text-davinci-002">text-davinci-002</option>
 							<option value="text-davinci-001">text-davinci-001</option>
-							<option selected="selected" value="text-curie-001">
+							<option value="text-curie-001">
 								text-curie-001
 							</option>
 							<option value="text-babbage-001">text-babbage-001</option>
