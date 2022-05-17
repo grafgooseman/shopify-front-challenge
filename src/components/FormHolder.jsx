@@ -70,6 +70,21 @@ export default function FormHolder() {
 		fetchAsync();
 	}
 
+	//Click submit on Enter handler
+	useEffect(() => {
+		const listener = event => {
+		  if (event.code === "Enter" || event.code === "NumpadEnter") {
+			event.preventDefault();
+			fetchAiResponce(promptTextRef.current.value);
+		  }
+		};
+		document.addEventListener("keydown", listener);
+		return () => {
+		  document.removeEventListener("keydown", listener);
+		};
+	  }, []);
+
+
 	return (
 		<Wrapper>
 			<h3>Form</h3>
@@ -78,7 +93,11 @@ export default function FormHolder() {
 				<textarea ref={promptTextRef} name="promptArea" />
 				<ButtonWrapper>
 					<DropdownWrapper>
-						<Form.Select as="select" custom onChange={e=>setSelectedEngine(e.target.value)}>
+						<Form.Select
+							as="select"
+							custom
+							onChange={(e) => setSelectedEngine(e.target.value)}
+						>
 							<option value="text-davinci-002">text-davinci-002</option>
 							<option value="text-davinci-001">text-davinci-001</option>
 							<option selected="selected" value="text-curie-001">
@@ -107,9 +126,8 @@ export default function FormHolder() {
 const Wrapper = styled.div`
 	margin: 3%;
 	h3 {
-		
 	}
-	`;
+`;
 
 const DropdownWrapper = styled.div`
 	margin-top: 30px;
@@ -140,6 +158,7 @@ const FormWrapper = styled.div`
 	}
 
 	button {
+		width: 136px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
