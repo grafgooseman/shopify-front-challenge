@@ -102,10 +102,10 @@ export default function FormHolder() {
 
 	return (
 		<Wrapper>
-			<h3>Form</h3>
+			<h2>Form</h2>
 			<FormWrapper>
 				<label htmlFor="promptArea">Select AI model and ask it about anything</label>
-				<textarea ref={promptTextRef} name="promptArea" />
+				<textarea id="promptArea" ref={promptTextRef} name="promptArea" />
 				<ButtonWrapper>
 					<DropdownWrapper>
 						<Form.Select
