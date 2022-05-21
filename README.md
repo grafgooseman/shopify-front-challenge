@@ -15,8 +15,11 @@ Big thought was given to semantics and accessibility.
 All headings are ```<h1>``` or ```<h3>``` where needed, buttons are actually ```<button>``` elements and text is located in ```<p>``` tags
 In addition, clicking ```Enter``` will also submit the AI request.
 
-### Error Handling
+### LightHouse Report
+![image](https://user-images.githubusercontent.com/56235052/169668275-abc2d3e0-8f7e-4dc3-b417-f7ff0cad4cb9.png)
 
+
+### Error Handling
 The application also has Error Handling. If the OpenAI is inaccessible or API key is incorrect, the app will alert about it. 
 
 ### Styling
