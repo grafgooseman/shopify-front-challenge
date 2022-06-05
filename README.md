@@ -1,5 +1,5 @@
 # Shopify Frontend Challenge
-Made by [*Artem Gusev*](https://www.linkedin.com/in/gusev-artem/) as a Shopify Frontend Challenge Fall 2022
+Made by [*Artem Gusev*](https://www.linkedin.com/in/gusev-artem/) as a *Shopify Frontend Challenge* Fall 2022
 
 #### Website link: https://shopify-front-challenge.pages.dev
 
@@ -24,9 +24,6 @@ The application also has Error Handling. If the OpenAI is inaccessible or API ke
 
 ### Styling
 For styling, the ```React-Bootstrap``` + ```Styled Components``` combination was used.  
-That allowed to have a quick and adaptable UI development workflow with the customization of Styled components 
+That allowed to have a quick and adaptable UI development workflow with the customization of *Styled components* 
 
-
-AI engine choices are hard coded in the final version. Even though there was a special infrastructure that sent requests to the openAI API asking what engines are available, it resulted in a wall of specialized engines with just slight variations. That's why I opted on using a hard-wired solution.
-
-Saving on reload is implemented throw browser ```Local storage``` and for instant UI updates without page reloading and data transfer, the ```React Context``` was used.
+Saving on reload is implemented through browser ```Local storage``` and for instant UI updates without page reloading and data transfer, the ```React Context``` was used.
