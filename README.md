@@ -1,5 +1,5 @@
 # Shopify Frontend Challenge
-Made by [*Artem Gusev*](https://www.linkedin.com/in/gusev-artem/). Specially for [**Shopify Internship program**](https://internships.shopify.com/?utm_source=Shopify-careers&utm_medium=early-talent-page&utm_campaign=general) Fall 2022
+Made by [*Artem Gusev*](https://www.linkedin.com/in/gusev-artem/) as a Shopify Frontend Challenge Fall 2022
 
 #### Website link: https://shopify-front-challenge.pages.dev
 
@@ -30,10 +30,3 @@ That allowed to have a quick and adaptable UI development workflow with the cust
 AI engine choices are hard coded in the final version. Even though there was a special infrastructure that sent requests to the openAI API asking what engines are available, it resulted in a wall of specialized engines with just slight variations. That's why I opted on using a hard-wired solution.
 
 Saving on reload is implemented throw browser ```Local storage``` and for instant UI updates without page reloading and data transfer, the ```React Context``` was used.
-
-## Conclusion
-I really hope that I could be useful to the Shopify team and the knowledge I got from college and my personal projects showed here in the best possible light.
-Even though my code might not be perfect, I would really like to hear how can it be refactored and improved.
-
-I am glad for the opportunity you are giving to all of us,  
-Looking forward to hearing from you soon🙂
