@@ -104,7 +104,7 @@ export default function FormHolder() {
 		<Wrapper>
 			<h2>Form</h2>
 			<FormWrapper>
-				<label htmlFor="promptArea">Select AI model and ask it about anything</label>
+				<label htmlFor="promptArea">Select AI model and ask it about anything. </label>
 				<textarea id="promptArea" ref={promptTextRef} name="promptArea" />
 				<ButtonWrapper>
 					<DropdownWrapper>
@@ -113,13 +113,13 @@ export default function FormHolder() {
 							onChange={(e) => setSelectedEngine(e.target.value)}
 							defaultValue={"text-curie-001"}
 						>
-							<option value="text-davinci-002">text-davinci-002</option>
-							<option value="text-davinci-001">text-davinci-001</option>
+							{/* <option value="text-davinci-002">(smart) davinci-002</option> */}
+							<option value="text-davinci-001">(smart) davinci</option>
 							<option value="text-curie-001">
-								text-curie-001
+								(avarage) curie
 							</option>
-							<option value="text-babbage-001">text-babbage-001</option>
-							<option value="text-ada-001">text-ada-001</option>
+							{/* <option value="text-babbage-001">(dumb) text-babbage-001</option> */}
+							<option value="text-ada-001">(dumb) ada</option>
 						</Form.Select>
 					</DropdownWrapper>
 

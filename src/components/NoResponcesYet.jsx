@@ -5,7 +5,7 @@ export default function NoResponcesYet() {
   return (
     <Wrapper>
         <div>
-            Ask AI to get your first responce
+            Ask AI to get your first response, see how different models respond to your questions.
         </div>
     </Wrapper>
   )
@@ -24,6 +24,5 @@ const Wrapper = styled.div`
         justify-content: center;
         width: 100%;
         height: 100%;
-
     }
 `;

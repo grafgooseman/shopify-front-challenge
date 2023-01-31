@@ -18,7 +18,7 @@ export default function ResponcesHolder() {
 
 	return (
 		<Wrapper>
-			<h2>Responces</h2>
+			<h2>Responses</h2>
 			<Content>
 				{responces.length === 0 ? (
 					<NoResponcesYet />
